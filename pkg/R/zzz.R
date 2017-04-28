@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
- 
-library(utils)
+
 .hdfsEnv <- new.env()
 .onLoad <- function(libname,pkgname){
-  vrs <- packageDescription(pkgname, lib.loc = libname, fields = "Version",
-                            drop = TRUE)
   if (Sys.getenv("HADOOP_CMD") == "") stop(sprintf("Environment variable HADOOP_CMD must be set before loading package %s", pkgname))
+}
+
+.onAttach <- function(libname, pkgname){
   packageStartupMessage("\nHADOOP_CMD=", Sys.getenv("HADOOP_CMD"))
   packageStartupMessage("\nBe sure to run hdfs.init()")
   #hdfs.init()
